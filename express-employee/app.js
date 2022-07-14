@@ -14,7 +14,7 @@ const port = 8080
 
 app.use(morgan('common'))
 app.use(express.json())
-app.use(logger)
+// app.use(logger)
 
 app.use('/api/v1/employees', empRouter)
 app.use('/api/v1/articles', artRouter)

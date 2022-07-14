@@ -6,6 +6,7 @@ const options = {
     useUnifiedTopology : true,
 }
 
+// module.exports.async function() => {
 const connectToMongo = async () => {
     try {
         await mongoose.connect(uri, options)

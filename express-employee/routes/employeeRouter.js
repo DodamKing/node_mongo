@@ -1,52 +1,35 @@
 const express = require('express')
+const Employee = require('../models/Employees')
 const router = express.Router()
 
-const emp = [
-    {
-        id : 1,
-        name : 'kim',
-        addr : {
-            city : 'seoul',
-            detail : '종로구',
-        },
-        position : '과장',
-    },
-    {
-        id : 2,
-        name : 'lee',
-        addr : 'seoul',
-        position : '부장',
-    },
-    {
-        id : 3,
-        name : 'park',
-        addr : 'seoul',
-        position : '차장',
-    },
-]
-
-
-router.get('/', (req, res) => {
-    res.json(emp)
+router.get('/', async (req, res) => {
+    try {
+        const employees = await Employee.find()
+        res.json(employees)
+    } catch (err) {
+        console.log(err);
+    }
 })
 
-router.get('/:empId', (req, res) => {
+router.get('/:empId', async (req, res) => {
     const empId = req.params.empId
 
-    for (let i=0; i<emp.length; i++) {
-        if (emp[i].id === parseInt(empId)) {
-            res.json(emp[i])
-        }
+    try {
+        const employee = await Employee.findOne({id : empId})
+        res.json(employee ? employee : '찾는 데이터가 없습니다')
+    } catch (err) {
+        console.log(err);
     }
-
-    res.json({
-        empId : empId,
-    })
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const employ = req.body
-    res.json(employ)
+    try {
+        const result = await Employee.create(employ) 
+        res.json(result)
+    } catch (err) {
+        console.log(err);
+    }
 })
 
 router.put('/', (req, res) => {
@@ -54,9 +37,14 @@ router.put('/', (req, res) => {
     
 })
 
-router.delete('/', (req, res) => {
-    res.json('직원 삭제')
-
+router.delete('/:empId', async (req, res) => {
+    const empId = req.params.empId
+    try {
+        const result = await Employee.remove({id : empId})
+        res.json(result)
+    } catch (err) {
+        console.log(err);
+    }
 })
 
 module.exports = router
