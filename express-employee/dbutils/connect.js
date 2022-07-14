@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-// const uri = 'mongodb+srv://admin:admin@cluster0.83nv4.mongodb.net/?retryWrites=true&w=majority'
 const uri = process.env.DB_URI
 const options = {
     useNewUrlParser : true,
