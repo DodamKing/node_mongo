@@ -17,8 +17,8 @@ router.get('/:articleId', async (req, res) => {
     
     try {
         const result = await Article.findById(articleId)
-        console.log(result.createdAt); // 디비에는 Date 형식으로 저장
-        console.log(result.createdAt.toLocaleString()); // 클라이언트에 출력할때 변화해서 보내줌
+        console.log(result.updatedAt); // 디비에는 Date 형식으로 저장
+        console.log(result.updatedAt.toLocaleString()); // 클라이언트에 출력할때 변화해서 보내줌
         res.json(result ? result : '찾는거 없음')
     } catch (err) {
         console.log(err);
