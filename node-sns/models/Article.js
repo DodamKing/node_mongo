@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const articleSchema = new Schema({
-    _id: Number,
+    // _id: Number,
     title: String,
     author: Number,
     body: String,
@@ -16,8 +16,10 @@ const articleSchema = new Schema({
         type : Date,
         default : Date().toLocaleString()
     },
-}, { 
-    _id: false 
-});
+}, 
+// { 
+//     _id: false 
+// }
+);
 
 module.exports = mongoose.model('Article', articleSchema)
