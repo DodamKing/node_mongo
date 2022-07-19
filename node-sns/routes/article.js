@@ -48,7 +48,24 @@ router.put('/', async (req, res) => {
     }
 })
 
-router.patch('/', (req, res) => {
+router.patch('/', async (req, res) => {
+    const article = req.body
+
+    const _id = article._id
+    const title = article.title
+    const body = article.body
+    const tags = article.tags
+
+    try {
+        const result = await Article.findByIdAndUpdate(_id, {
+            title : title,
+            body : body,
+            tags : tags,
+        })
+        res.json(result)
+    } catch (err) {
+        console.error(err)
+    }
 
 })
 
